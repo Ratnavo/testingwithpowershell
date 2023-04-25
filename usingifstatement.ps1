@@ -55,4 +55,37 @@ Set-AzStorageBlobContent -Context $StorageAccount.Context -Container $ContainerN
     
 #=============== checking for existing storage account ======================
 #use -Error SilentlyContinue
-#Updating the file
+# create file share
+
+$AccountName = "rdstorageaccount007"
+$RG = "RG-CI-PS-2"
+
+$StorageAccount = Get-AzStorageAccount -Name $AccountName -ResourceGroupName $RG
+
+#Creating File share but first we create hash table properties to denote the properties
+
+$FileShareConfig = @{
+    Context = $StorageAccount.Context
+    Name = "mydata"
+}
+
+# splatting
+
+New-AzStorageShare @FileShareConfig
+
+$Directorydetails = @{
+    Context = $StorageAccount.Context
+    ShareName = 'mydata'
+    Path = 'C:\Users\ratna\Documents\samplesecond.txt'
+}
+
+New-AzstorageDirectory @$Directorydetails
+
+C:\Users\ratna\Documents\samplesecond.txt
+
+$FileDetails = @{
+    Context = $StorageAccount.Context
+    ShareName = 'mydata'
+    Source = 'samplesecond.txt'
+    Path = 'C:\Users\ratna\Documents\samplesecond.txt'
+}
