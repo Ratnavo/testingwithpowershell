@@ -1,11 +1,4 @@
-$AppId = 'db1dee28-a63b-477d-bb74-2109732ae6cd'
-$AppSecret = 'VtR8Q~afObwSHiXveYSZh5hlsRMcPMdoKeCYjag5'
 
-$SecureSecret = $AppSecret | ConvertTo-SecureString -AsPlainText -Force
-$Credential = New-Object -TypeName System.Management.Automation.PSCredential `
-    -ArgumentList $AppId, $SecureSecret
-$TenantID = '5bb19d03-7f41-4ea0-bce6-d62f8e15f1e6'
-Connect-AzAccount -ServicePrincipal -Credential $Credential -Tenant $TenantID
 
 #===================== Create Storage Account =======================
 Get-AzLocation
